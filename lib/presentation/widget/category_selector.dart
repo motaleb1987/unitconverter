@@ -9,9 +9,6 @@ class CategorySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ConverterProvider>();
-    return Row(
-      children: List.generate(provider.categories.length, (index){
-
-      },));
+    return Row();
   }
 }
