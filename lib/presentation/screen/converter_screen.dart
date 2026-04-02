@@ -24,6 +24,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,20 +37,42 @@ class _ConverterScreenState extends State<ConverterScreen> {
                 AppStrings.enterValue,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
-              InputField(),
+               InputField(),
               Text(
                 AppStrings.selectUnits,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
               ),
               Row(
                 children: [
-                  Expanded(child: UnitDropdown()),
-                  IconButton(onPressed: ()=> provider.swap(), icon: Icon(Icons.swap_horizontal_circle)),
-                  Expanded(child: UnitDropdown()),
-                 
+                  Expanded(
+                    child: UnitDropdown(
+                      label: AppStrings.fromLabel,
+                      selectedUnit: provider.fromUnit,
+                      units: provider.currentUnit,
+                      onChanged: (value) {
+                        context.read<ConverterProvider>().updateFormUnit(
+                          value!,
+                        );
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => context.read<ConverterProvider>().swap(),
+                    icon: Icon(Icons.swap_horiz),
+                  ),
+                  Expanded(
+                    child: UnitDropdown(
+                      label: AppStrings.toLabel,
+                      selectedUnit: provider.toUnit,
+                      units: provider.currentUnit,
+                      onChanged: (value) {
+                        context.read<ConverterProvider>().updateToUnit(value!);
+                      },
+                    ),
+                  ),
                 ],
               ),
-
+              //ResultCard(),
             ],
           ),
         ),
