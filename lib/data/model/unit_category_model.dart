@@ -34,7 +34,7 @@ class UnitCategoryModel extends UnitCategory {
   }) {
     if (fromUnit == toUnit) return value;
     switch (categoryName) {
-      case 'length':
+      case 'Length':
       return  _convertLength(value, fromUnit, toUnit);
       case 'Weight':
         return _convertWeight(value, fromUnit, toUnit);

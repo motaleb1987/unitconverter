@@ -5,6 +5,7 @@ import 'package:unitconverter/core/app_strings.dart';
 import '../provider/converter_provider.dart';
 import '../widget/category_selector.dart';
 import '../widget/input_field.dart';
+import '../widget/result_card.dart';
 import '../widget/unit_dropdown.dart';
 
 class ConverterScreen extends StatefulWidget {
@@ -48,9 +49,9 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     child: UnitDropdown(
                       label: AppStrings.fromLabel,
                       selectedUnit: provider.fromUnit,
-                      units: provider.currentUnit,
+                      units: provider.currentUnits,
                       onChanged: (value) {
-                        context.read<ConverterProvider>().updateFormUnit(
+                        context.read<ConverterProvider>().updateFromUnit(
                           value!,
                         );
                       },
@@ -64,7 +65,7 @@ class _ConverterScreenState extends State<ConverterScreen> {
                     child: UnitDropdown(
                       label: AppStrings.toLabel,
                       selectedUnit: provider.toUnit,
-                      units: provider.currentUnit,
+                      units: provider.currentUnits,
                       onChanged: (value) {
                         context.read<ConverterProvider>().updateToUnit(value!);
                       },
@@ -72,7 +73,8 @@ class _ConverterScreenState extends State<ConverterScreen> {
                   ),
                 ],
               ),
-              //ResultCard(),
+              SizedBox(height: 10,),
+              ResultCard(),
             ],
           ),
         ),

@@ -9,6 +9,28 @@ class CategorySelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<ConverterProvider>();
-    return Row();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 20,
+      children: List.generate(provider.categories.length, (index) {
+        final category = provider.categories[index];
+        final isSelected = provider.selectedCategoryIndex == index;
+        return GestureDetector(
+          onTap: () => context.read<ConverterProvider>().selectCategory(index),
+          child: Container(
+              padding: EdgeInsets.all(25),
+              decoration: BoxDecoration(
+                color: isSelected ? Theme.of(context).primaryColor.withAlpha(80) : Theme.of(context).colorScheme.surfaceContainerHigh,
+                borderRadius: BorderRadius.circular(10),
+          
+              ),
+              child: Column(children: [
+            Icon(category.iconData),
+            Text(category.name),
+          ])),
+        );
+
+      }),
+    );
   }
 }

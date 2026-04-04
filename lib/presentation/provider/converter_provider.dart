@@ -17,8 +17,10 @@ class ConverterProvider extends ChangeNotifier{
   String get toUnit => _toUnit;
   String get inputText => _inputText;
 
-  List<String> get _currentUnits => _categories[_selectedCategoryIndex].units;
-  List<String> get currentUnit => _currentUnits;
+
+  List<String> get _currentUnits => categories[_selectedCategoryIndex].units;
+  List<String> get currentUnits => _currentUnits;
+
 
 
   ConverterProvider(){
@@ -26,19 +28,26 @@ class ConverterProvider extends ChangeNotifier{
     _toUnit = _currentUnits[1];
   }
 
+
+
+
   String get result {
     final double? inputValue = double.tryParse(_inputText);
-    if(inputValue == null) return AppStrings.resultHint;
+
+    if (inputValue == null) return AppStrings.resultHint;
+
     final double converted = UnitCategoryModel.convert(
-        categoryName: _categories[_selectedCategoryIndex].name,
-        value: inputValue,
-        fromUnit: fromUnit,
-        toUnit: toUnit
+      value: inputValue,
+      fromUnit: fromUnit,
+      toUnit: toUnit,
+      categoryName: _categories[_selectedCategoryIndex].name,
     );
+
     return _format(converted);
   }
 
-  void selectedCategory(int index){
+
+  void selectCategory(int index){
     _selectedCategoryIndex = index;
     _fromUnit = _currentUnits[0];
     _toUnit = _currentUnits[1];
@@ -46,20 +55,25 @@ class ConverterProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+
+
   void updateInput(String value){
     _inputText = value;
     notifyListeners();
   }
 
-  void updateFormUnit(String unit){
+
+  void updateFromUnit(String unit) {
     _fromUnit = unit;
     notifyListeners();
   }
 
-  void updateToUnit(String unit){
+
+  void updateToUnit(String unit) {
     _toUnit = unit;
     notifyListeners();
   }
+
    void swap(){
     final temp = _fromUnit;
     _fromUnit = toUnit;

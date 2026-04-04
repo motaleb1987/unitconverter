@@ -27,6 +27,7 @@ class _InputFieldState extends State<InputField> {
 
   @override
   Widget build(BuildContext context) {
+    //final inputText = context.watch<ConverterProvider>().inputText;
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -80,11 +81,7 @@ class _InputFieldState extends State<InputField> {
           ),
         ),
         onChanged: (value) {
-
-          //provider.updateInputValue(value);
-          setState(() {
-            context.read<ConverterProvider>().updateInput(value);
-          }); //
+          context.read<ConverterProvider>().updateInput(value);
         },
       ),
     );
